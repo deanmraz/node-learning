@@ -61,14 +61,13 @@ const CurdController = new Crud;
 CrudRoute.use(CurdController.middleware);
 CrudRoute.get('/', CurdController.get);
 app.use(CrudRoute.routes());
-// app.use(CrudRoute.allowedMethods());
+app.use(CrudRoute.allowedMethods());
 
 const UserRoute = new Router({
   prefix: '/users'
 });
 UserRoute.get('/', (new User).get);
 app.use(UserRoute.routes());
-// app.use(UserRoute.allowedMethods());
 
 
 module.exports.hello = serverless(app);
