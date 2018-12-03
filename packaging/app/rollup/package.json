@@ -1,11 +1,10 @@
 {
-  "name": "service",
+  "name": "app",
   "version": "0.0.1",
-  "main": "index.js",
+  "main": ".build/bundle.js",
   "license": "MIT",
-  "private": true,
   "dependencies": {
-    "howLongTillLunch": "link:../framework"
+    "library": "link:../../lib"
   },
   "devDependencies": {
     "webpack": "^4.26.1",
@@ -13,5 +12,11 @@
     "rollup": "^0.67.0",
     "rollup-plugin-commonjs": "^9.1.0",
     "rollup-plugin-node-resolve": "^3.0.0"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "start": "node ./.build/bundle.js",
+    "test": "yarn build && yarn start"
   }
 }
