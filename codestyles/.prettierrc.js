@@ -1,3 +1,7 @@
 module.exports = {
-  "singleQuote": true
+  bracketSpacing: true,
+  proseWrap: 'always',
+  singleQuote: true,
+  arrowParens: 'always',
+  trailingComma: 'es5',
 };
