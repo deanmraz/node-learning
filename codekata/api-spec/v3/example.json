@@ -1,0 +1,308 @@
+{
+  "data": [{
+    "type": "apis",
+    "id": "apis-1",
+    "attributes": {
+      "name": "Get User's Watchlist",
+      "type": "account-tickers",
+      "request": {
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "method": "GET",
+        "parameters": null,
+        "validate": null,
+        "url": "http://localhost:3000/v2/account-tickers"
+      },
+      "response": {
+        "headers": {
+          "Content-Type": "application/vnd.api+json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "OPTIONS,DELETE,GET,HEAD,PATCH,POST,PUT",
+          "Content-Encoding": "gzip"
+        },
+        "status-code": 200
+      },
+      "examples": [{
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "method": "GET",
+        "url": "http://localhost:3000/v2/account-tickers",
+        "request": {
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "method": "GET",
+          "url": "http://localhost:3000/v2/account-tickers"
+        },
+        "name": "Default"
+      }]
+    }
+  }, {
+    "type": "apis",
+    "id": "apis-2",
+    "attributes": {
+      "name": "Add Symbol to User's Watchlist",
+      "type": "account-tickers",
+      "request": {
+        "headers": {
+          "Content-Type": "application/vnd.api+json",
+          "Authorized": "something|true"
+        },
+        "method": "POST",
+        "parameters": null,
+        "validate": null,
+        "url": "http://localhost:3000/v2/account-tickers"
+      },
+      "response": {
+        "headers": {
+          "Content-Type": "application/vnd.api+json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "OPTIONS,DELETE,GET,HEAD,PATCH,POST,PUT",
+          "Content-Encoding": "gzip"
+        },
+        "status-code": 201
+      },
+      "examples": [{
+        "headers": {
+          "Content-Type": "application/vnd.api+json",
+          "Authorized": "something|true"
+        },
+        "method": "POST",
+        "url": "http://localhost:3000/v2/account-tickers",
+        "request": {
+          "headers": {
+            "Content-Type": "application/vnd.api+json",
+            "Authorized": "something|true"
+          },
+          "method": "POST",
+          "url": "http://localhost:3000/v2/account-tickers"
+        },
+        "name": "Default"
+      }]
+    }
+  }, {
+    "type": "apis",
+    "id": "apis-3",
+    "attributes": {
+      "name": "Update Symbol's ordering",
+      "type": "account-tickers",
+      "request": {
+        "headers": {
+          "Content-Type": "application/vnd.api+json"
+        },
+        "method": "PUT",
+        "parameters": null,
+        "validate": {
+          "json": {
+            "data": {
+              "attributes": {
+                "id": "required|string"
+              }
+            }
+          }
+        },
+        "url": "http://localhost:3000/v2/account-tickers"
+      },
+      "response": {
+        "headers": {
+          "Content-Type": "application/vnd.api+json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "OPTIONS,DELETE,GET,HEAD,PATCH,POST,PUT",
+          "Content-Encoding": "gzip"
+        },
+        "status-code": 200
+      },
+      "examples": [{
+        "headers": {
+          "Content-Type": "application/vnd.api+json"
+        },
+        "method": "PUT",
+        "url": "http://localhost:3000/v2/account-tickers",
+        "request": {
+          "headers": {
+            "Content-Type": "application/vnd.api+json"
+          },
+          "method": "PUT",
+          "url": "http://localhost:3000/v2/account-tickers"
+        },
+        "name": "Default"
+      }]
+    }
+  }, {
+    "type": "apis",
+    "id": "apis-4",
+    "attributes": {
+      "name": "Remove Symbol from User's Watchlist",
+      "type": "account-tickers",
+      "request": {
+        "headers": {
+          "Content-Type": "application/vnd.api+json"
+        },
+        "method": "DELETE",
+        "parameters": null,
+        "validate": {
+          "json": {
+            "data": {
+              "attributes": {
+                "id": "required|string"
+              }
+            }
+          }
+        },
+        "url": "http://localhost:3000/v2/account-tickers"
+      },
+      "response": {
+        "headers": {
+          "Content-Type": "application/vnd.api+json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "OPTIONS,DELETE,GET,HEAD,PATCH,POST,PUT",
+          "Content-Encoding": "gzip"
+        },
+        "status-code": 204
+      },
+      "examples": [{
+        "headers": {
+          "Content-Type": "application/vnd.api+json"
+        },
+        "method": "DELETE",
+        "url": "http://localhost:3000/v2/account-tickers",
+        "request": {
+          "headers": {
+            "Content-Type": "application/vnd.api+json"
+          },
+          "method": "DELETE",
+          "url": "http://localhost:3000/v2/account-tickers"
+        },
+        "name": "Default"
+      }]
+    }
+  }, {
+    "type": "apis",
+    "id": "apis-5",
+    "attributes": {
+      "name": "Retrieve Ticker Prices",
+      "type": "tickers",
+      "request": {
+        "headers": {
+          "Content-Type": "application/vnd.api+json"
+        },
+        "method": "GET",
+        "parameters": [{
+          "name": "q",
+          "description": "searching symbols and titles",
+          "type": "string"
+        }],
+        "validate": null,
+        "url": "http://localhost:3000/v2/tickers"
+      },
+      "response": {
+        "headers": {
+          "Content-Type": "application/vnd.api+json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "OPTIONS,DELETE,GET,HEAD,PATCH,POST,PUT",
+          "Content-Encoding": "gzip"
+        },
+        "status-code": 200
+      },
+      "examples": [{
+        "headers": {
+          "Content-Type": "application/vnd.api+json"
+        },
+        "method": "GET",
+        "url": "http://localhost:3000/v2/tickers",
+        "name": "Retrieve Ticker Prices"
+      }, {
+        "headers": {
+          "Content-Type": "application/vnd.api+json"
+        },
+        "method": "GET",
+        "url": "http://localhost:3000/v2/tickers",
+        "name": "Ticker search by symbol",
+        "parameters": {
+          "ordering": "trending"
+        }
+      }, {
+        "headers": {
+          "Content-Type": "application/vnd.api+json"
+        },
+        "method": "GET",
+        "url": "http://localhost:3000/v2/tickers",
+        "name": "Retrieve ticker by id",
+        "parameters": {
+          "id": "BTC"
+        }
+      }]
+    }
+  }, {
+    "type": "apis",
+    "id": "apis-6",
+    "attributes": {
+      "name": "Retrieve Articles",
+      "type": "articles",
+      "request": {
+        "headers": {
+          "Content-Type": "application/vnd.api+json"
+        },
+        "method": "GET",
+        "parameters": [{
+          "name": "symbols",
+          "description": "retrieve articles by symbols",
+          "type": "array of strings"
+        }, {
+          "name": "ordering",
+          "description": "order by trending or latest, defaults trending",
+          "type": "string",
+          "rules": ["oneOf:trending,latest"]
+        }, {
+          "name": "last",
+          "description": "used for paging, last item received, base64encoded, needs to have an object with query parameters",
+          "type": "string"
+        }],
+        "validate": null,
+        "url": "http://localhost:3000/v2/articles"
+      },
+      "response": {
+        "headers": {
+          "Content-Type": "application/vnd.api+json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "OPTIONS,DELETE,GET,HEAD,PATCH,POST,PUT",
+          "Content-Encoding": "gzip"
+        },
+        "status-code": 200
+      },
+      "examples": [{
+        "headers": {
+          "Content-Type": "application/vnd.api+json"
+        },
+        "method": "GET",
+        "url": "http://localhost:3000/v2/articles",
+        "name": "Find articles by symbols",
+        "parameters": {
+          "symbols": ["BTC", "ETH"]
+        }
+      }, {
+        "headers": {
+          "Content-Type": "application/vnd.api+json"
+        },
+        "method": "GET",
+        "url": "http://localhost:3000/v2/articles",
+        "name": "Find trending articles",
+        "parameters": {
+          "ordering": "trending"
+        }
+      }, {
+        "headers": {
+          "Content-Type": "application/vnd.api+json"
+        },
+        "method": "GET",
+        "url": "http://localhost:3000/v2/articles",
+        "name": "Find article by id",
+        "parameters": {
+          "ordering": "trending"
+        }
+      }]
+    }
+  }]
+}

@@ -1,0 +1,102 @@
+name: Stock App
+host: localhost:3000
+namespace: v2
+protocol: http
+
+request:
+  headers:
+    Content-Type: "application/vnd.api+json"
+
+response:
+  headers:
+    Content-Type: "application/vnd.api+json"
+    Access-Control-Allow-Origin: "*"
+    Access-Control-Allow-Methods: "OPTIONS,DELETE,GET,HEAD,PATCH,POST,PUT"
+    Content-Encoding: "gzip"
+  methods:
+    GET:
+      statusCode: 200
+    POST:
+      statusCode: 201
+    PUT:
+      statusCode: 200
+    DELETE:
+      statusCode: 204
+
+apis:
+  - type: account-tickers
+    routes:
+      - name: Get User's Watchlist
+        method: GET
+        request:
+          headers:
+            Content-Type: "application/json"
+
+      - name: Add Symbol to User's Watchlist
+        method: POST
+        request:
+          headers:
+            Authorized: something|true
+
+      - name: Update Symbol's ordering
+        method: PUT
+        validate:
+          json:
+            data:
+              attributes:
+                id: required|string
+
+      - name: Remove Symbol from User's Watchlist
+        method: DELETE
+        validate:
+          json:
+            data:
+              attributes:
+                id: required|string
+
+  - type: tickers
+    routes:
+      - name: Retrieve Ticker Prices
+        description: Get ticker price details or search for ticker by name or symbol
+        method: GET
+        parameters:
+          - name: q
+            description: searching symbols and titles
+            type: string
+        examples:
+          - name: Retrieve Ticker Prices
+          - name: Ticker search by symbol
+            parameters:
+              ordering: trending
+          - name: Retrieve ticker by id
+            parameters:
+              id: APPL
+
+  - type: articles
+    routes:
+      - name: Retrieve Articles
+        method: GET
+        parameters:
+          - name: symbols
+            description: retrieve articles by symbols
+            type: array of strings
+          - name: ordering
+            description: order by trending or latest, defaults trending
+            type: string
+            rules:
+              - oneOf:trending,latest
+          - name: last
+            description: used for paging, last item received, base64encoded, needs to have an object with query parameters
+            type: string
+        examples:
+          - name: Find articles by symbols
+            parameters:
+              symbols:
+                - APPL
+                - ATVI
+          - name: Find trending articles
+            parameters:
+              ordering: trending
+          - name: Find article by id
+            parameters:
+              ordering: trending
