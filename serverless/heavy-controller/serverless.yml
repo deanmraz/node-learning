@@ -1,0 +1,52 @@
+
+service: heavy-controller # NOTE: update this with your service name
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  profile: rtdev
+  stage: master
+  region: us-west-2
+
+functions:
+  users:
+    handler: app/controllers/users.default
+    events:
+      - http:
+          path: api/users
+          method: any
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - code
+              - redirect
+            allowCredentials: false
+
+  hellos:
+    handler: app/controllers/hellos.default
+    events:
+      - http:
+          path: api/hellos
+          method: any
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - code
+              - redirect
+            allowCredentials: false
