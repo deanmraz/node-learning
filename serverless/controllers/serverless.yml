@@ -1,5 +1,5 @@
 
-service: heavy-controller # NOTE: update this with your service name
+service: controllers # NOTE: update this with your service name
 
 plugins:
   - serverless-webpack
@@ -17,7 +17,7 @@ functions:
     handler: app/controllers/users.default
     events:
       - http:
-          path: api/users
+          path: api/users/{proxy+}
           method: any
           cors:
             origin: '*'
@@ -36,7 +36,7 @@ functions:
     handler: app/controllers/hellos.default
     events:
       - http:
-          path: api/hellos
+          path: api/hellos/{proxy+}
           method: any
           cors:
             origin: '*'
