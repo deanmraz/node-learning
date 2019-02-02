@@ -12,14 +12,18 @@ export default function() {
   (a) => {
     return a;
   };
+  const spread = { test: 1, two: 2 };
   const object = {
     bar: 'baz',
     qux: 'quux',
+    ...spread,
   };
+  const spreadArr = ['one', 'two'];
+  const arr = ['baz', 'quux', ...spreadArr];
   const current = path.dirname();
   const wrap =
     'testing very long string so we ensure that wrapping is good for this project setup';
-  return current + wrap + object.bar;
+  return current + wrap + object.bar + arr[0];
 }
 
 export const asyncFunction = async () => {
