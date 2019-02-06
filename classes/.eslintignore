@@ -1,0 +1,6 @@
+/.webpack/
+/.dist/
+/.serverless/
+/bower_components/
+/node_modules/
+/coverage/
