@@ -1,0 +1,33 @@
+
+service: controllers # NOTE: update this with your service name
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  profile: dev
+  stage: master
+  region: us-west-2
+
+functions:
+  hellos:
+    handler: app/controllers/hellos.default
+    events:
+      - http:
+          path: api/hellos/{proxy+}
+          method: any
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - code
+              - redirect
+            allowCredentials: false
