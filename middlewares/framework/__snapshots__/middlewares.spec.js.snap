@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Middlewares Chain Middlewares 1`] = `
+Object {
+  "body": "{\\"event\\":{\\"event\\":1},\\"context\\":{\\"context\\":1}}",
+  "headers": Object {
+    "Content-Type": "text/plain",
+    "run-time": 1002,
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`Middlewares Return Handler Request Data 1`] = `
+Object {
+  "aws": Object {
+    "context": Object {
+      "context": 1,
+    },
+    "event": Object {
+      "event": 1,
+    },
+  },
+}
+`;
