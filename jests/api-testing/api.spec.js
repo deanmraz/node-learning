@@ -1,4 +1,4 @@
-const { has, get, set, isEmpty } = require('lodash');
+const { has, get, set, isEmpty, isNull } = require('lodash');
 
 const users = [
   {
@@ -8,7 +8,7 @@ const users = [
   },
   {
     createdAt: new Date(),
-    id: Math.floor(Math.random() * 20),
+    id: 0, // should not be zero
     name: 'LeBron James 2',
   },
   {
@@ -23,35 +23,36 @@ const users = [
   },
 ];
 
+const flattenWildCards = (rule, data, type, flatten) => {
+  if (rule.indexOf('*') > -1) {
+    const parentPath = rule.substr(0, rule.indexOf('*') - 1);
+    let propertyValue;
+    if (isEmpty(parentPath)) {
+      propertyValue = data;
+    } else {
+      propertyValue = get(data, parentPath);
+    }
+    if (propertyValue) {
+      for (let propertyNumber = 0; propertyNumber < propertyValue.length; propertyNumber++) {
+        flattenWildCards(rule.replace('*', propertyNumber), data, type, flatten);
+      }
+    }
+  } else {
+    flatten[rule] = type;
+  }
+}
+
 const toType = (rules, data) => {
 
-  // flatten rules
   const flatten = {};
   for(const rule in rules) {
     const type = rules[rule];
-    if (rule.indexOf('*') > -1) {
-      const parentPath = rule.substr(0, rule.indexOf('*') - 1);
-      let propertyValue;
-      if (isEmpty(parentPath)) {
-        propertyValue = data;
-      } else {
-        propertyValue = get(data, parentPath);
-      }
-      if (propertyValue) {
-        for (let propertyNumber = 0; propertyNumber < propertyValue.length; propertyNumber++) {
-          flatten[rule.replace('*', propertyNumber)] = type;
-        }
-      }
-    } else {
-      flatten[rule] = type;
-    }
+    flattenWildCards(rule, data, type, flatten);
   }
-
-  console.log(flatten);
 
   for (const rule in flatten) {
     const value = get(data, rule);
-    if (has(data, rule) && value) {
+    if (has(data, rule) && !isNull(value)) {
       set(data, rule, flatten[rule]);
     }
   }
@@ -60,47 +61,57 @@ const toType = (rules, data) => {
 }
 
 describe('API Test Demos', () => {
-  test('Nested Objects', () => {
+  test('Wildcard first level array', () => {
     expect(toType({
       '*.createdAt': 'DATETIME',
       '*.id': 'NUMBER',
-    }, users)).toMatchSnapshot();
+    }, [...users])).toMatchSnapshot();
   });
 
-  test('Nested Objects with attribute prefix', () => {
+  test('Wildcard 2nd level data.array', () => {
     expect(toType({
       'data.*.createdAt': 'DATETIME',
       'data.*.id': 'NUMBER',
     }, {
-      data: users
+      data: [...users]
     })).toMatchSnapshot();
   });
-  test('Nested Objects with attribute prefix deeper', () => {
+
+  test('Wildcard 3rd level data.secondary.array', () => {
     expect(toType({
       'data.second.*.createdAt': 'DATETIME',
       'data.second.*.id': 'NUMBER',
     }, {
       data: {
-        second: users
-      }
-    })).toMatchSnapshot();
-  });
-  test('Nested Objects with attribute prefix deeper', () => {
-    expect(toType({
-      'data.second.*.createdAt': 'DATETIME',
-      'data.second.*.id': 'NUMBER',
-    }, {
-      data: {
-        second: users
+        second: [...users]
       }
     })).toMatchSnapshot();
   });
 
-  test('Do not set null or empty values', () => {
+  test('Keep NULL values', () => {
     expect(toType({
-      'data.*.createdAt': 'DATETIME',
       'data.*.id': 'NUMBER',
-      'data.*.hasMany.*.id': 'NUMBER',
+      'data.*.createdAt': 'DATETIME',
+    }, {
+      data: [
+        {
+          createdAt: new Date(),
+          id: null,
+          name: 'LeBron James 2',
+        },
+        {
+          createdAt: new Date(),
+          id: Math.floor(Math.random() * 20),
+          name: 'LeBron James 2',
+        },
+      ]
+    })).toMatchSnapshot();
+  });
+
+  test('Only sanitize attributes that exist', () => {
+    expect(toType({
+      'data.*.id': 'NUMBER',
+      'data.*.createdAt': 'DATETIME',
     }, {
       data: [
         {
@@ -109,14 +120,34 @@ describe('API Test Demos', () => {
         },
         {
           createdAt: new Date(),
-          id: null,
+          id: Math.floor(Math.random() * 20),
           name: 'LeBron James 2',
         },
       ]
     })).toMatchSnapshot();
   });
 
-  test('Nested Objects with attribute prefix deeper', () => {
+  test('Sanitize Zero Number', () => {
+    expect(toType({
+      'data.*.id': 'NUMBER',
+      'data.*.createdAt': 'DATETIME',
+    }, {
+      data: [
+        {
+          createdAt: new Date(),
+          id: 0,
+          name: 'LeBron James',
+        },
+        {
+          createdAt: new Date(),
+          id: Math.floor(Math.random() * 20),
+          name: 'LeBron James 2',
+        },
+      ]
+    })).toMatchSnapshot();
+  });
+
+  test('Handle double wildcard data.*.hasMany.*.something', () => {
     expect(toType({
       'data.*.createdAt': 'DATETIME',
       'data.*.id': 'NUMBER',

@@ -1,0 +1,177 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`API Test Demos Handle double wildcard data.*.hasMany.*.something 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "createdAt": "DATETIME",
+      "hasMany": Array [
+        Object {
+          "id": "NUMBER",
+          "name": "Has Many",
+        },
+        Object {
+          "id": "NUMBER",
+          "name": "Has Many",
+        },
+        Object {
+          "id": "NUMBER",
+          "name": "Has Many",
+        },
+      ],
+      "id": "NUMBER",
+      "name": "LeBron James",
+    },
+    Object {
+      "createdAt": "DATETIME",
+      "hasMany": Array [
+        Object {
+          "id": "NUMBER",
+          "name": "Has Many",
+        },
+        Object {
+          "id": "NUMBER",
+          "name": "Has Many",
+        },
+        Object {
+          "id": "NUMBER",
+          "name": "Has Many",
+        },
+      ],
+      "id": "NUMBER",
+      "name": "LeBron James 2",
+    },
+  ],
+}
+`;
+
+exports[`API Test Demos Keep NULL values 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "createdAt": "DATETIME",
+      "id": null,
+      "name": "LeBron James 2",
+    },
+    Object {
+      "createdAt": "DATETIME",
+      "id": "NUMBER",
+      "name": "LeBron James 2",
+    },
+  ],
+}
+`;
+
+exports[`API Test Demos Only sanitize attributes that exist 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "createdAt": "DATETIME",
+      "name": "LeBron James",
+    },
+    Object {
+      "createdAt": "DATETIME",
+      "id": "NUMBER",
+      "name": "LeBron James 2",
+    },
+  ],
+}
+`;
+
+exports[`API Test Demos Sanitize Zero Number 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "createdAt": "DATETIME",
+      "id": "NUMBER",
+      "name": "LeBron James",
+    },
+    Object {
+      "createdAt": "DATETIME",
+      "id": "NUMBER",
+      "name": "LeBron James 2",
+    },
+  ],
+}
+`;
+
+exports[`API Test Demos Wildcard 2nd level data.array 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "createdAt": "DATETIME",
+      "id": "NUMBER",
+      "name": "LeBron James",
+    },
+    Object {
+      "createdAt": "DATETIME",
+      "id": "NUMBER",
+      "name": "LeBron James 2",
+    },
+    Object {
+      "createdAt": "DATETIME",
+      "id": "NUMBER",
+      "name": "LeBron James 3",
+    },
+    Object {
+      "createdAt": "DATETIME",
+      "id": "NUMBER",
+      "name": "LeBron James 4",
+    },
+  ],
+}
+`;
+
+exports[`API Test Demos Wildcard 3rd level data.secondary.array 1`] = `
+Object {
+  "data": Object {
+    "second": Array [
+      Object {
+        "createdAt": "DATETIME",
+        "id": "NUMBER",
+        "name": "LeBron James",
+      },
+      Object {
+        "createdAt": "DATETIME",
+        "id": "NUMBER",
+        "name": "LeBron James 2",
+      },
+      Object {
+        "createdAt": "DATETIME",
+        "id": "NUMBER",
+        "name": "LeBron James 3",
+      },
+      Object {
+        "createdAt": "DATETIME",
+        "id": "NUMBER",
+        "name": "LeBron James 4",
+      },
+    ],
+  },
+}
+`;
+
+exports[`API Test Demos Wildcard first level array 1`] = `
+Array [
+  Object {
+    "createdAt": "DATETIME",
+    "id": "NUMBER",
+    "name": "LeBron James",
+  },
+  Object {
+    "createdAt": "DATETIME",
+    "id": "NUMBER",
+    "name": "LeBron James 2",
+  },
+  Object {
+    "createdAt": "DATETIME",
+    "id": "NUMBER",
+    "name": "LeBron James 3",
+  },
+  Object {
+    "createdAt": "DATETIME",
+    "id": "NUMBER",
+    "name": "LeBron James 4",
+  },
+]
+`;
