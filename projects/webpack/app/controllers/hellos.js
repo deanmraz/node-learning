@@ -2,10 +2,20 @@ import BaseController from '@app/controllers/base';
 
 class Controller extends BaseController {
   async get(/*event , context*/) {
+    const spreadObject = {
+      spread: true,
+    };
+    const spreadArray = ['spreading'];
+    const trimLeft = '   /trimLeft/'.trimLeft();
+    // const trimStart = '/trimStart/'.trimStart('/');
     return {
       statusCode: 200,
       body: JSON.stringify({
         hellos: true,
+        object: { ...spreadObject },
+        array: [...spreadArray],
+        trimLeft,
+        // trimStart,
       }),
     };
   }
