@@ -21,6 +21,7 @@
     "fix:prettier": "npx prettier \"app/**/*.{js,jsx,ts,tsx}\" --write",
     "fix:eslint": "npx eslint --fix app",
     "test:lint": "npx eslint app && npx prettier \"app/**/*.{js,jsx,ts,tsx}\" --list-different",
-    "dev": "sls offline start --dontPrintOutput"
+    "dev": "sls offline start --dontPrintOutput",
+    "devd": "node --inspect /Users/dmraz/.nvm/versions/node/v8.14.0/bin/sls offline start --dontPrintOutput"
   }
 }
