@@ -6,16 +6,7 @@ class Controller extends BaseController {
     return {
       statusCode: 200,
       body: JSON.stringify({
-        hellos: true,
-      }),
-    };
-  }
-
-  async post(/*event , context*/) {
-    return {
-      statusCode: 200,
-      body: JSON.stringify({
-        hellos: 'POSTED',
+        users: true,
       }),
     };
   }
