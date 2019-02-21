@@ -1,7 +1,6 @@
 import BaseController from '@app/controllers/base';
 
 class Controller extends BaseController {
-
   async get(/*event , context*/) {
     return {
       statusCode: 200,
@@ -10,7 +9,6 @@ class Controller extends BaseController {
       }),
     };
   }
-
 }
 
 export default async (event, context) => {
