@@ -25,8 +25,15 @@ module.exports = {
   plugins: [],
 
   module: {
-    rules: [],
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: ['eslint-loader'],
+      },
+    ],
   },
+
   resolve: {
     alias: {
       '@app': path.resolve(__dirname, 'app'),
