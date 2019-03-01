@@ -12,6 +12,25 @@ provider:
   region: us-west-2
 
 functions:
+  users:
+    handler: app/controllers/users.default
+    events:
+      - http:
+          path: api/users/{proxy+}
+          method: any
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - code
+              - redirect
+            allowCredentials: false
+
   hellos:
     handler: app/controllers/hellos.default
     events:
