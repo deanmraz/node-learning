@@ -9,7 +9,9 @@ let page;
 let pendingXHR;
 
 beforeAll(async () => {
-  browser = await puppeteer.launch();
+  browser = await puppeteer.launch({
+    headless: false,
+  });
   page = await browser.newPage();
   pendingXHR = new PendingXHR(page);
   await page.setViewport({ width: 1280, height: 800 })
@@ -40,7 +42,9 @@ defineFeature(feature, test => {
       await page.click(selector);
       await page.keyboard.type(term);
       try {
-        const image = await page.screenshot({fullPage: true});
+        const image = await page.screenshot({
+          // fullPage: true
+        });
         expect(image).toMatchImageSnapshot({
           failureThreshold: '0.05',
           failureThresholdType: 'percent',
@@ -62,9 +66,11 @@ defineFeature(feature, test => {
       await page.waitForNavigation({ waitUntil: 'networkidle0' })
       await pendingXHR.waitForAllXhrFinished();
       try {
-        const image = await page.screenshot({fullPage: true});
+        const image = await page.screenshot({
+          // fullPage: true
+        });
         expect(image).toMatchImageSnapshot({
-          failureThreshold: '0.05',
+          failureThreshold: '0.15',
           failureThresholdType: 'percent',
           customSnapshotIdentifier: `${scenarioName}-result`
         });
